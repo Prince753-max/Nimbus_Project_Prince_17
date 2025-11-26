@@ -131,5 +131,17 @@ int main(){
         (*count)++;
         return transactions;
     }
+    void monthlysummary(Transaction *transactions, int count, int month, int year,
+    double *incomeTotal, double *expenseTotal){
+        *incomeTotal = 0;
+        *expenseTotal = 0;
+        for(int i=0; i< count; i++){
+            if(transactions[i].date.year == year){
+                if(strcmp(transaction[i].type, "income")==0)
+            {
+                
+            }}
+        }
+    }
 }
 

@@ -28,5 +28,4 @@ typedef struct{
 Transaction*addTransaction(Transaction*transaction,int*count, Transaction newTrans);
 void monthlySummary(Transaction *transactions, int count, int month, int year, double *incomeTotal,
 double *expenseTotal);
-void categorySpending
-
+void categorySpending(transaction*transaction,int count,int main,int year);

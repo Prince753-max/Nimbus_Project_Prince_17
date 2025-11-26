@@ -29,3 +29,4 @@ Transaction*addTransaction(Transaction*transaction,int*count, Transaction newTra
 void monthlySummary(Transaction *transactions, int count, int month, int year, double *incomeTotal,
 double *expenseTotal);
 void categorySpending();
+ho0wemembwjhdbdjvjdjcvbiudjfdwf 

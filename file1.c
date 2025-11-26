@@ -58,12 +58,41 @@ int main(){
             printf("Enter type (income/expense): ");
             scanf("%s", t.type);
 
-            transactions = addTransaction(transactions, &transactioncount, t);
-            if(strcmp(transactions[i].category, t.category)==0 && transactions[i].date.month==t.date.month && transactions[i].date.year==t.date.year && strcmp(transactions[i].type, "expense")==0){
-                spent+=transaction[i].amount;
+            transactions=addTransaction(transactions, &transactionCount, t);
+            if(strcmp(t.type, "expenses")==0){
+                //check budget alert
+                double spent=0;
+                for(int i=0; i<transactionCount; i++){
+                    if(strcmp(transactions[i].category, t.category) == 0 && transaction[i].date.month == t.date.month && transactions[i].date.year == t.date.year && strcmp(transactions[i].type, "expenses")==0){
+                        spent+= transactions[i].amount;
+                    }
+                }
+                if(checkBudgetAlert(budgets, budgetCount, spent, t.category)){
+                    printf("ALERT: Spending exceeded budget for category '%s'!\n ",t.category);
+                }
+            }    
+        }else if(strcmp(input, "2")==0){
+            if(budgetcount <MAX_CATEGORY){
+                printf("Enter category name for budget: ");
+                scanf("%s", budget[budgetCount].category);
+                printf("Enter budget amount: ");
+                scanf("%lf", &budgets[budgetCount].budget);
+                budgetCount++;
+            }else{
+                printf("Budget category limit reached.\n");
             }
-        }
-        
+        }else if(strcmp(input, "3")==0){
+            int month, year;
+            printf("Enter month and year (MM YYYY): ");
+            scanf("%d %d", &month, &year);
+            double incomeTotal=0, expenseTotal=0;
+            monthlySummary(transactions, transactionCount, month, year, &incomeTotal, &expenseTotal);
+            printf("Monthly Summary for %02d/%d\n", month, year);
+            printf("Total Income: %.2lf\n", incomeTotal);
+            printf("Total Expense: %.2lf\n", expenseTotal);
+        }else if(strcmp(input, "4")==0){
+            int month, year;
+        } 
     }
 }
 

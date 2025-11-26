@@ -28,7 +28,7 @@ typedef struct{
 Transaction*addTransaction(Transaction*transaction,int*count, Transaction newTrans);
 void monthlySummary(Transaction *transactions, int count, int month, int year, double *incomeTotal,
 double *expenseTotal);
-void categorySpending(transaction*transaction,int count,int main,int year);
+void categorySpending(Transaction*transaction,int count,int main,int year);
 int checkBudgetalert(Budget *budgets, int budgetCount, double spent, char *category);
 void trendReport(Transaction *transactions, int count, int months, int year);
 void exportToCSV(Transaction *transactions, int count, const char *filename);
@@ -58,7 +58,7 @@ int main(){
             printf("Enter type (income/expense): ");
             scanf("%s", t.type);
 
-            transactions=addTransaction(transactions, &transactionCount, t);
+            Transactions =addTransaction(transactions, &transactionCount, t);
             if(strcmp(t.type, "expenses")==0){
                 //check budget alert
                 double spent=0;
@@ -92,7 +92,44 @@ int main(){
             printf("Total Expense: %.2lf\n", expenseTotal);
         }else if(strcmp(input, "4")==0){
             int month, year;
-        } 
+            printf("Enter month and year(MM YYYY):");
+            scanf("%d %d", &month, &year);
+            printf("Category-wise spending for %02d/%d:\n",month,year);
+           categorySpending(transaction,transactionCount, month,year);} 
+           else if(strcmp(input,"5")==0){
+            int months, year;
+            printf("Enter number of past months for trend report:");
+            scanf("%d", &months);
+            printf("Enter current year: ");
+            scanf("%d", &year);
+            trendReport(transaction,transactionCount,months,year);
+           } else if(strcmp(input,"6")==0){
+            char filename[100];
+            printf("Enter filename to export(e.g..data.csv):");
+            scanf("%s",filename);
+            exportToCSV(transaction, transactionCount,
+                filename);
+            printf("Data exported successfully to %s\n",
+                filename);
+           }else if(strcmp(input,"7")==0){
+            running = 0;
+           }else{
+            printf("Invalid choice, try again.\n");
+           }
+        }
+        free(transaction);
+        return 0; 
+    }
+    Transaction*addTransaction(Transaction*transactions,int*count, Transaction newTrans){
+        Transaction*temp = realloc(transaction,(*count + 1)*sizeof(Transaction));
+        if(temp == NULL){
+            printf("Memory allocation failed!\n");
+            return transactions;
+        }
+        transactions = temp;
+        transactions[*count]= newTrans;
+        (*count)++;
+        return transactions;
     }
 }
 

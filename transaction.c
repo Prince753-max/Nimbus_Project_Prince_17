@@ -9,10 +9,10 @@ Transaction newTrans){
        sizeof(Transaction));
 if(temp == NULL){
     printf("Memory allocation failed!\n");
-    return transactions;
+    return transaction;
 }
-transactions = temp;
-transactions[*count] = newTrans;
+transaction = temp;
+transaction[*count] = newTrans;
 (*count)++;
 return transaction;
 
@@ -23,50 +23,51 @@ year, double *incomeTotal , double *expenseTotal) {
     *incomeTotal = 0;
     *expenseTotal = 0;
     for (int i=0; i< count; i++) {
-        if(transactions[i].date.month == month && transaction[i].date.year
+        if(transactions[i].date.month == month && transactions[i].date.year
         == year){
                    if(strcmp(transactions[i].type, "income") == 0 ){
                     *incomeTotal += transactions[i].amount;
-                  }eslse if(strcmp(transactions[i].type, "expense") == 0) {
+                  }else if(strcmp(transactions[i].type, "expense") == 0) {
                     *expenseTotal += transactions[i].amount;
                   }
                 }
             }
         }
 
-void categotrySpending(Transaction *transactions, int count, int month, int year) {
+void categorySpending(Transaction *transactions, int count, int month, int year) {
     double categoryTotal[MAX_CATEGORY] = {0};
-    char categories[MAX_CATEGORY][MAX-LEN];
-    int catcount = 0;
+    #define MAX_LEN 50
+    char categories[MAX_CATEGORY][MAX_LEN];
+    int catCount = 0;
 
     for(int i=0; i < count; i++){
         if(transactions[i].date.month == month && transactions[i].date.year
-        == year && strcmp(transactions[i]type, "expense") == 0){
+        == year && strcmp(transactions[i].type, "expense") == 0){
             int found = -1;
-            for(int j=0; j < catcount; j++) {
-                if(strcmp(caegories[j], transactions[i]. category) == 0){
+            for(int j=0; j < catCount; j++) {
+                if(strcmp(categories[j], transactions[i]. category) == 0){
                     found = j;
                     break;
                 }
             }
 if(found == -1 && catCount < MAX_CATEGORY){
     strcpy(categories[catCount], transactions[i].category);
-    categoryTotals[catCount] = transactions[i].amount;
+    categoryTotal[catCount] = transactions[i].amount;
     catCount++;
-} esle if(found != -1){
-    categoryTotals[found] += transactions[i].amount;
+} else if(found != -1){
+    categoryTotal[found] += transactions[i].amount;
      }        
    }
  }
  for(int i=0; i < catCount; i++){
-    printf("%s : %.21f\n", categories[i], categoryTotals[i]);
+    printf("%s : %.21f\n", categories[i], categoryTotal[i]);
  }
 }
 
-int checkBudgetAlert(Budget *budgets, int budgetCount, dounle spent, char
+int checkBudgetAlert(Budget *budgets, int budgetCount, double spent, char
     *category) {
-        for(int i=0; i < bufgetCount; i++) {
-            if(strcmp(budget[i].category , category == 0){
+        for(int i=0; i < budgetCount; i++) {
+            if(strcmp(budgets[i].category , category) == 0){
                 if(spent > budgets[i].budget){
                     return 1;
                 }
@@ -88,7 +89,7 @@ int checkBudgetAlert(Budget *budgets, int budgetCount, dounle spent, char
         }
     printf("Trend Report for last %d months of year %d:\n", months, year);
     for(int m=0; m < months; m++){
-        printf("Month %d : %.21f\n", MAX_MONTHS - m, monthlyExpenses[m];)
+        printf("Month %d : %.21f\n", MAX_MONTHS - m, monthlyExpenses[m]);
     }
 }
 void exportToCSV(Transaction *transaction, int count, const char *filename)
@@ -98,15 +99,15 @@ void exportToCSV(Transaction *transaction, int count, const char *filename)
         printf("Failed to open file %s for writing.\n", filename);
         return;
     }
-    fprint(fp, "Date,Amount,Category,Type\n");
+    fprintf(fp, "Date,Amount,Category,Type\n");
     for(int i=0; i < count; i++){
-        fprintf(fp, "%02d/%"02d/04d,%.21f,%s,%s\n,
-        transactions[i].date.day,
-    transactions[i].date.month,
-    transactions[i].date.year,
-transactions[i].amount,
-transactions[i].category,
-transactions[i].type);
+        fprintf(fp, "%02d/%02d/%04d,%.21f,%s,%s\n",
+        transaction[i].date.day,
+    transaction[i].date.month,
+    transaction[i].date.year,
+transaction[i].amount,
+transaction[i].category,
+transaction[i].type);
     }
     fclose(fp);
 }

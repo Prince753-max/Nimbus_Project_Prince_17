@@ -102,7 +102,7 @@ void exportToCSV(Transaction *transaction, int count, const char *filename)
     for(int i=0; i < count; i++){
         fprintf(fp, "%02d/%"02d/04d,%.21f,%s,%s\n,
         transactions[i].date.day,
-    transactions[i.date.month,
+    transactions[i].date.month,
     transactions[i].date.year,
 transactions[i].amount,
 transactions[i].category,

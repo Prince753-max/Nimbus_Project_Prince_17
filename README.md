@@ -31,7 +31,7 @@ Export transaction history in CSV format compatible with Excel or Google Sheets.
 
 Modular code structure with clear separation of concerns for maintainability.
 
-**Example Usage****
+**Example Usage**
 Add Transaction: Enter date, amount, category (e.g., Food, Rent), and whether it is income or expense; the transaction is stored dynamically.
 
 Set Budget: Define spending limits for various categories.

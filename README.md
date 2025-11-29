@@ -32,8 +32,10 @@ Export transaction history in CSV format compatible with Excel or Google Sheets.
 Modular code structure with clear separation of concerns for maintainability.
 
 **Example Usage**
+
 *Compile Command*
 gcc main.c transaction.c finance_utils.c -o prog
+
 *Run Command*
 ./prog
 
